@@ -1,0 +1,26 @@
+﻿@using System.Globalization;
+@model MenuTabViewModel
+@{
+    ViewData["Title"] = "Cook Book Store";
+    ViewData["HeaderTitle"] = "Dishes";
+}
+
+<section>
+    @if (Model.OrderFinished)
+    {
+        <div class="w-fit bg-ter-cont rounded-md text-on-ter-cont py-4 px-6 text-xl mx-auto mb-3">
+            Thank you! Your order will be ready in a matter of minutes!
+        </div>
+    }
+    <div class="bg-sur border rounded-full border-outline sticky top-0">
+        <a asp-action="Order" class="block text-xl text-center py-5 text-sec">You ordered @Model.Tab.DishesCount dishes to the total of @Model.Tab.Cost.ToString("C", CultureInfo.CurrentCulture)</a>
+    </div>
+    <div class="flex flex-wrap items-center mt-6 gap-y-12">
+        <!-- Dish Card -->
+        @foreach (Dish dish in Model.Dishes)
+        {
+            <partial name="_DishStoreCard" model="dish"/>
+        }
+    </div>
+</section>
+
